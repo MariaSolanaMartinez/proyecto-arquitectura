@@ -1,0 +1,240 @@
+## This file contains all the build statements describing the
+# compilation DAG.
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# 
+# Which is the root file.
+# =============================================================================
+
+# =============================================================================
+# Project: PracticaArqui
+# Configurations: Release
+# =============================================================================
+
+#############################################
+# Minimal version of Ninja required by this file
+
+ninja_required_version = 1.5
+
+
+#############################################
+# Set configuration variable for custom commands.
+
+CONFIGURATION = Release
+# =============================================================================
+# Include auxiliary files.
+
+
+#############################################
+# Include rules file.
+
+include CMakeFiles/rules.ninja
+
+# =============================================================================
+
+#############################################
+# Logical path to working directory; prefix for absolute paths.
+
+cmake_ninja_workdir = /Users/maria/CLionProjects/PracticaArqui/cmake-build-release/
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target aos
+
+
+#############################################
+# Order-only phony target for aos
+
+build cmake_object_order_depends_target_aos: phony || CMakeFiles/aos.dir
+
+build CMakeFiles/aos.dir/imageaos.cpp.o: CXX_COMPILER__aos_Release /Users/maria/CLionProjects/PracticaArqui/imageaos.cpp || cmake_object_order_depends_target_aos
+  DEP_FILE = CMakeFiles/aos.dir/imageaos.cpp.o.d
+  FLAGS = −march=native -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk −Wall −Wextra −Werror −pedantic −pedantic−errors -std=gnu++2a
+  OBJECT_DIR = CMakeFiles/aos.dir
+  OBJECT_FILE_DIR = CMakeFiles/aos.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target aos
+
+
+#############################################
+# Link the static library libaos.a
+
+build libaos.a: CXX_STATIC_LIBRARY_LINKER__aos_Release CMakeFiles/aos.dir/imageaos.cpp.o
+  ARCH_FLAGS = -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
+  LANGUAGE_COMPILE_FLAGS = −march=native
+  OBJECT_DIR = CMakeFiles/aos.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = libaos.a
+  TARGET_PDB = aos.a.dbg
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target soa
+
+
+#############################################
+# Order-only phony target for soa
+
+build cmake_object_order_depends_target_soa: phony || CMakeFiles/soa.dir
+
+build CMakeFiles/soa.dir/imagesoa.cpp.o: CXX_COMPILER__soa_Release /Users/maria/CLionProjects/PracticaArqui/imagesoa.cpp || cmake_object_order_depends_target_soa
+  DEP_FILE = CMakeFiles/soa.dir/imagesoa.cpp.o.d
+  FLAGS = −march=native -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk −Wall −Wextra −Werror −pedantic −pedantic−errors -std=gnu++2a
+  OBJECT_DIR = CMakeFiles/soa.dir
+  OBJECT_FILE_DIR = CMakeFiles/soa.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target soa
+
+
+#############################################
+# Link the static library libsoa.a
+
+build libsoa.a: CXX_STATIC_LIBRARY_LINKER__soa_Release CMakeFiles/soa.dir/imagesoa.cpp.o
+  ARCH_FLAGS = -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
+  LANGUAGE_COMPILE_FLAGS = −march=native
+  OBJECT_DIR = CMakeFiles/soa.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = libsoa.a
+  TARGET_PDB = soa.a.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target imgaos
+
+
+#############################################
+# Order-only phony target for imgaos
+
+build cmake_object_order_depends_target_imgaos: phony || cmake_object_order_depends_target_aos
+
+build CMakeFiles/imgaos.dir/image−aos.cpp.o: CXX_COMPILER__imgaos_Release /Users/maria/CLionProjects/PracticaArqui/image−aos.cpp || cmake_object_order_depends_target_imgaos
+  DEP_FILE = CMakeFiles/imgaos.dir/image−aos.cpp.o.d
+  FLAGS = −march=native -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk −Wall −Wextra −Werror −pedantic −pedantic−errors -std=gnu++2a
+  OBJECT_DIR = CMakeFiles/imgaos.dir
+  OBJECT_FILE_DIR = CMakeFiles/imgaos.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target imgaos
+
+
+#############################################
+# Link the executable imgaos
+
+build imgaos: CXX_EXECUTABLE_LINKER__imgaos_Release CMakeFiles/imgaos.dir/image−aos.cpp.o | libaos.a || libaos.a
+  FLAGS = −march=native -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
+  LINK_LIBRARIES = -lcommon  libaos.a
+  OBJECT_DIR = CMakeFiles/imgaos.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = imgaos
+  TARGET_PDB = imgaos.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target imgsoa
+
+
+#############################################
+# Order-only phony target for imgsoa
+
+build cmake_object_order_depends_target_imgsoa: phony || cmake_object_order_depends_target_soa
+
+build CMakeFiles/imgsoa.dir/image−soa.cpp.o: CXX_COMPILER__imgsoa_Release /Users/maria/CLionProjects/PracticaArqui/image−soa.cpp || cmake_object_order_depends_target_imgsoa
+  DEP_FILE = CMakeFiles/imgsoa.dir/image−soa.cpp.o.d
+  FLAGS = −march=native -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk −Wall −Wextra −Werror −pedantic −pedantic−errors -std=gnu++2a
+  OBJECT_DIR = CMakeFiles/imgsoa.dir
+  OBJECT_FILE_DIR = CMakeFiles/imgsoa.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target imgsoa
+
+
+#############################################
+# Link the executable imgsoa
+
+build imgsoa: CXX_EXECUTABLE_LINKER__imgsoa_Release CMakeFiles/imgsoa.dir/image−soa.cpp.o | libsoa.a || libsoa.a
+  FLAGS = −march=native -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
+  LINK_LIBRARIES = -lcommon  libsoa.a
+  OBJECT_DIR = CMakeFiles/imgsoa.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = imgsoa
+  TARGET_PDB = imgsoa.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/maria/CLionProjects/PracticaArqui/cmake-build-release && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build edit_cache: phony CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/maria/CLionProjects/PracticaArqui/cmake-build-release && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/maria/CLionProjects/PracticaArqui -B/Users/maria/CLionProjects/PracticaArqui/cmake-build-release
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build rebuild_cache: phony CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Target aliases.
+
+build aos: phony libaos.a
+
+build soa: phony libsoa.a
+
+# =============================================================================
+# Folder targets.
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/maria/CLionProjects/PracticaArqui/cmake-build-release
+
+build all: phony libaos.a libsoa.a imgaos imgsoa
+
+# =============================================================================
+# Built-in targets
+
+
+#############################################
+# Re-run CMake if any of its inputs changed.
+
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake
+  pool = console
+
+
+#############################################
+# A missing CMake input file is not an error.
+
+build ../CMakeLists.txt /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake: phony
+
+
+#############################################
+# Clean all the built files.
+
+build clean: CLEAN
+
+
+#############################################
+# Print all primary targets available.
+
+build help: HELP
+
+
+#############################################
+# Make the all target the default.
+
+default all
