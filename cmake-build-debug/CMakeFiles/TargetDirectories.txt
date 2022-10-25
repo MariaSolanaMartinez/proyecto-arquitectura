@@ -1,0 +1,6 @@
+/Users/maria/CLionProjects/PracticaArqui/cmake-build-debug/CMakeFiles/aos.dir
+/Users/maria/CLionProjects/PracticaArqui/cmake-build-debug/CMakeFiles/soa.dir
+/Users/maria/CLionProjects/PracticaArqui/cmake-build-debug/CMakeFiles/imgaos.dir
+/Users/maria/CLionProjects/PracticaArqui/cmake-build-debug/CMakeFiles/imgsoa.dir
+/Users/maria/CLionProjects/PracticaArqui/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/maria/CLionProjects/PracticaArqui/cmake-build-debug/CMakeFiles/rebuild_cache.dir
