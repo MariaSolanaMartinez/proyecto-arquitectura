@@ -67,6 +67,10 @@ int main() {
         Mono.Mono("../../../in/balloon.bmp");
         Mono.Export("mono.bmp");
     }
+    if (oper == histo){
+        Image Histo(0,0);
+        Histo.Histo("../../../in/balloon.bmp");
+    }
 
     return 0;
 }
