@@ -126,16 +126,36 @@ void Image::Mono(const char* path){
         f.ignore(paddingAmount);
     }
     f.close();
-    cout << "File read" << endl;
+    cout << "File created" << endl;
 }
 void Image::Histo(const char *path){
-    ofstream f;
+    ifstream f;
     f.open(path, ios::out | ios::binary);
-    if (!f.is_open())
-    {
-        cout << "File could not be opened\n";
-        return;
+    ofstream histo;
+    histo.open("../../../histograma.hst");
+    float c;
+    int valor = 0;
+    int cont_valor;
+    for (int m = 0; m < 3; m++) {
+        for (int l = 0; l < 255; l++) {
+            for (int y = 0; y < i_height; y++) {
+                for (int x = 0; x < i_width; x++) {
+                    unsigned char color[3];
+                    f.read(reinterpret_cast<char *>(color), 3);
+                    c = i_colors[y * i_width + x].r = static_cast<float>(color[m]) / 255;
+                    if (c = valor) {
+                        cont_valor += 1;
+                    }
+                }
+            }
+            histo << cont_valor << "\n";
+            valor += 1;
+            cont_valor = 0;
+        }
+        valor = 0;
     }
+    histo.close();
+    cout << "File created\n";
 }
 void Image::Export(const char* path) const
 {
