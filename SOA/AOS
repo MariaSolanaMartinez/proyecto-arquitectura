@@ -1,0 +1,214 @@
+/*------------------aos---------------------------*/
+void write_histo(std::filesystem::path file, std::string_view end){
+    using namespace std;
+    filesystem::path enddir = end;
+    auto endfile = enddir / file.filename();
+    ofstream file{endfile, ios::out};
+
+}
+void quitar(char *nombre, char *extension) {
+    int desplazamiento = strlen(nombre) - strlen(extension);
+    char *start = nombre + desplazamiento;
+
+    if (strcmp(start, extension) == 0) {
+        *start = 0;
+    }
+}
+void histog(std::filesystem::path myfile) {
+    char nombre = myfile.filename();
+    char extension = ".bmp";
+    quitar(nombre, extension);
+    std::filesystem::path file{nombre+".hst"};
+    histoR(file);
+    histoG(file);
+    histoB(file);
+
+    return file;
+}
+void histoR(std::filesystem::path file) {
+    ofstream out{file, ios::out};
+    out.open(file);
+    float c;
+    int valor = 0;
+    int cont_valor;
+    for (int l = 0; l < 255; l++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                unsigned char color[3];
+                c = aos[y * width + x].R = static_cast<float>(color[2]);
+                if (c = valor) {
+                    cont_valor += 1;
+                }
+            }
+        }
+        file << cont_valor << "\n";
+        valor += 1;
+        cont_valor = 0;
+    }
+}
+void histoG(std::filesystem::path file) {
+    ofstream out;
+    out.open(file);
+    float c;
+    int valor = 0;
+    int cont_valor;
+    for (int l = 0; l < 255; l++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                unsigned char color[3];
+                c = aos[y * width + x].G = static_cast<float>(color[1]);
+                if (c = valor) {
+                    cont_valor += 1;
+                }
+            }
+        }
+        file << cont_valor << "\n";
+        valor += 1;
+        cont_valor = 0;
+    }
+}
+void histoB(std::filesystem::path file) {
+    ofstream out;
+    out.open(file);
+    float c;
+    int valor = 0;
+    int cont_valor;
+    for (int l = 0; l < 255; l++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                unsigned char color[3];
+                c = aos[y * width + x].B = static_cast<float>(color[0]);
+                if (c = valor) {
+                    cont_valor += 1;
+                }
+            }
+        }
+        file << cont_valor << "\n";
+        valor += 1;
+        cont_valor = 0;
+    }
+}
+void histo(std::filesystem::path myfile, std::string_view end){
+    using namespace std;
+    cout << myfile << ":\n";
+    chrono::steady_clock::time_point startL = chrono::steady_clock::now();
+    bitmap bmp(myfile);
+    chrono::steady_clock::time_point endL = chrono::steady_clock::now();
+    cout << "  Load time = " << chrono::duration_cast<chrono::microseconds>(endL - startL).count() << "µs" << endl;
+    chrono::steady_clock::time_point startG = chrono::steady_clock::now();
+    filesystem::path file = bmp.histog(myfile);
+    chrono::steady_clock::time_point endG = chrono::steady_clock::now();
+    cout << "  Histo time = " << chrono::duration_cast<chrono::microseconds>(endG - startG).count() << "µs" << endl;
+    chrono::steady_clock::time_point startS = chrono::steady_clock::now();
+    bmp.write_histo(file, end);
+    chrono::steady_clock::time_point endS = chrono::steady_clock::now();
+    cout << "  Store time = " << chrono::duration_cast<chrono::microseconds>(endS - startS).count() << "µs" << endl;
+}
+
+
+/*-------------------soa-------------------------*/
+void write_histo(std::filesystem::path file, std::string_view end){
+    using namespace std;
+    filesystem::path enddir = end;
+    auto endfile = enddir / file.filename();
+    ofstream file{endfile, ios::out};
+
+}
+void quitar(char *nombre, char *extension) {
+    int desplazamiento = strlen(nombre) - strlen(extension);
+    char *start = nombre + desplazamiento;
+
+    if (strcmp(start, extension) == 0) {
+        *start = 0;
+    }
+}
+void histog(std::filesystem::path myfile) {
+    char nombre = myfile.filename();
+    char extension = ".bmp";
+    quitar(nombre, extension);
+    std::filesystem::path file{nombre+".hst"};
+    histoR(file);
+    histoG(file);
+    histoB(file);
+
+    return file;
+}
+void histoR(std::filesystem::path file) {
+    ofstream out{file, ios::out};
+    out.open(file);
+    float c;
+    int valor = 0;
+    int cont_valor;
+    for (int l = 0; l < 255; l++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                unsigned char color[3];
+                c = soa.R[y * width + x] = static_cast<float>(color[2]);
+                if (c = valor) {
+                    cont_valor += 1;
+                }
+            }
+        }
+        file << cont_valor << "\n";
+        valor += 1;
+        cont_valor = 0;
+    }
+}
+void histoG(std::filesystem::path file) {
+    ofstream out;
+    out.open(file);
+    float c;
+    int valor = 0;
+    int cont_valor;
+    for (int l = 0; l < 255; l++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                unsigned char color[3];
+                c = soa.G[y * width + x] = static_cast<float>(color[1]);
+                if (c = valor) {
+                    cont_valor += 1;
+                }
+            }
+        }
+        file << cont_valor << "\n";
+        valor += 1;
+        cont_valor = 0;
+    }
+}
+void histoB(std::filesystem::path file) {
+    ofstream out;
+    out.open(file);
+    float c;
+    int valor = 0;
+    int cont_valor;
+    for (int l = 0; l < 255; l++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                unsigned char color[3];
+                c = soa.B[y * width + x] = static_cast<float>(color[0]);
+                if (c = valor) {
+                    cont_valor += 1;
+                }
+            }
+        }
+        file << cont_valor << "\n";
+        valor += 1;
+        cont_valor = 0;
+    }
+}
+void histo(std::filesystem::path myfile, std::string_view end){
+    using namespace std;
+    cout << myfile << ":\n";
+    chrono::steady_clock::time_point startL = chrono::steady_clock::now();
+    bitmap bmp(myfile);
+    chrono::steady_clock::time_point endL = chrono::steady_clock::now();
+    cout << "  Load time = " << chrono::duration_cast<chrono::microseconds>(endL - startL).count() << "µs" << endl;
+    chrono::steady_clock::time_point startG = chrono::steady_clock::now();
+    string_view file = bmp.histog(myfile);
+    chrono::steady_clock::time_point endG = chrono::steady_clock::now();
+    cout << "  Histo time = " << chrono::duration_cast<chrono::microseconds>(endG - startG).count() << "µs" << endl;
+    chrono::steady_clock::time_point startS = chrono::steady_clock::now();
+    bmp.write_histo(file, end);
+    chrono::steady_clock::time_point endS = chrono::steady_clock::now();
+    cout << "  Store time = " << chrono::duration_cast<chrono::microseconds>(endS - startS).count() << "µs" << endl;
+}
