@@ -1,0 +1,108 @@
+/*--------------------mono-soa--------------------*/
+void monoBMP(){
+    using namespace std;
+    float nr, ng, nb, cr, cg, cb, tl, gm, g;
+    for (int y = 0; y < height; y++){
+        for (int x = 0; x < width; x++) {
+            unsigned char color[3];
+            nr = soa.R[y * width+ x] = static_cast<float>(color[2]) / 255;
+            ng = soa.G[y * width+ x] = static_cast<float>(color[1]) / 255;
+            nb = soa.B[y * width+ x] = static_cast<float>(color[0]) / 255;
+            if (nr <= 0.04045 or ng <= 0.04045 or nb <= 0.04045){
+                cr = nr / 12.92;
+                cg = ng / 12.92;
+                cb = nb / 12.92;
+            }
+            else{
+                cr = pow(((nr + 0.055)/1.055), 2.4);
+                cg = pow(((ng + 0.055)/1.055), 2.4);
+                cb = pow(((nb + 0.055)/1.055), 2.4);
+            }
+            tl = 0.2126 * cr + 0.7152 * cg + 0.0722 * cb;
+            if (tl <= 0.0031308){
+                gm = 12.92 * tl;
+            }
+            else{
+                gm = 1.055 * pow(tl, (1/2.4)) - 0.055;
+            }
+            g = gm * 255;
+            SetColor(Color(g, g, g), x, y);
+        }
+    }
+}
+void SetColor(const Color& color, int x, int y)
+{
+    soa.R[y * width + x] = color.r;
+    soa.G[y * width + x] = color.g;
+    soa.B[y * width + x] = color.b;
+}
+void mono(std::filesystem::path myfile, std::string_view end){
+    using namespace std;
+    cout << myfile << ":\n";
+    chrono::steady_clock::time_point startL = chrono::steady_clock::now();
+    bitmap bmp(myfile);
+    chrono::steady_clock::time_point endL = chrono::steady_clock::now();
+    cout << "  Load time = " << chrono::duration_cast<chrono::microseconds>(endL - startL).count() << "µs" << endl;
+    chrono::steady_clock::time_point startG = chrono::steady_clock::now();
+    bmp.monoBMP();
+    chrono::steady_clock::time_point endG = chrono::steady_clock::now();
+    cout << "  Mono time = " << chrono::duration_cast<chrono::microseconds>(endG - startG).count() << "µs" << endl;
+    chrono::steady_clock::time_point startS = chrono::steady_clock::now();
+    bmp.write(myfile, end);
+    chrono::steady_clock::time_point endS = chrono::steady_clock::now();
+    cout << "  Store time = " << chrono::duration_cast<chrono::microseconds>(endS - startS).count() << "µs" << endl;
+}
+/*--------------------mono-aos--------------------*/
+void monoBMP(){
+    using namespace std;
+    float nr, ng, nb, cr, cg, cb, tl, gm, g;
+    for (int y = 0; y < height; y++){
+        for (int x = 0; x < width; x++) {
+            unsigned char color[3];
+            nr = aos[y * width+ x].R = static_cast<float>(color[2]) / 255;
+            ng = aos[y * width+ x].G = static_cast<float>(color[1]) / 255;
+            nb = aos[y * width+ x].B = static_cast<float>(color[0]) / 255;
+            if (nr <= 0.04045 or ng <= 0.04045 or nb <= 0.04045){
+                cr = nr / 12.92;
+                cg = ng / 12.92;
+                cb = nb / 12.92;
+            }
+            else{
+                cr = pow(((nr + 0.055)/1.055), 2.4);
+                cg = pow(((ng + 0.055)/1.055), 2.4);
+                cb = pow(((nb + 0.055)/1.055), 2.4);
+            }
+            tl = 0.2126 * cr + 0.7152 * cg + 0.0722 * cb;
+            if (tl <= 0.0031308){
+                gm = 12.92 * tl;
+            }
+            else{
+                gm = 1.055 * pow(tl, (1/2.4)) - 0.055;
+            }
+            g = gm * 255;
+            SetColor(Color(g, g, g), x, y);
+        }
+    }
+}
+void SetColor(const Color& color, int x, int y)
+{
+    aos[y * width + x].R = color.r;
+    aos[y * width + x].G = color.g;
+    aos[y * width + x].B = color.b;
+}
+void mono(std::filesystem::path myfile, std::string_view end){
+    using namespace std;
+    cout << myfile << ":\n";
+    chrono::steady_clock::time_point startL = chrono::steady_clock::now();
+    bitmap bmp(myfile);
+    chrono::steady_clock::time_point endL = chrono::steady_clock::now();
+    cout << "  Load time = " << chrono::duration_cast<chrono::microseconds>(endL - startL).count() << "µs" << endl;
+    chrono::steady_clock::time_point startG = chrono::steady_clock::now();
+    bmp.monoBMP();
+    chrono::steady_clock::time_point endG = chrono::steady_clock::now();
+    cout << "  Mono time = " << chrono::duration_cast<chrono::microseconds>(endG - startG).count() << "µs" << endl;
+    chrono::steady_clock::time_point startS = chrono::steady_clock::now();
+    bmp.write(myfile, end);
+    chrono::steady_clock::time_point endS = chrono::steady_clock::now();
+    cout << "  Store time = " << chrono::duration_cast<chrono::microseconds>(endS - startS).count() << "µs" << endl;
+}
